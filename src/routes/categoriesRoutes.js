@@ -9,4 +9,7 @@ categoriesRouter.get('/api/categories', async (req, res) => {
   res.json('getting all cats');
 });
 
+// sukurti front-end papke
+// index.html sugeneruoti seleta su kategorijos kaip pavadinimais ir id kaip values
+
 module.exports = categoriesRouter;
