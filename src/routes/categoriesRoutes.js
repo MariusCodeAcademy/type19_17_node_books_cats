@@ -16,6 +16,8 @@ categoriesRouter.get('/api/categories', async (req, res) => {
   res.json(rows);
 });
 
+// POST /api/categories - sukuria nauja kategorija
+
 // sukurti front-end papke
 // index.html sugeneruoti seleta su kategorijos kaip pavadinimais ir id kaip values
 
