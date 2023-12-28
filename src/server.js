@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 const mysql = require('mysql2/promise');
 const { dbConfig } = require('./config');
+const categoriesRouter = require('./routes/categoriesRoutes');
 
 const app = express();
 
@@ -14,11 +15,14 @@ app.use(express.json());
 app.use(morgan('dev'));
 app.use(cors());
 
+// routes
 app.get('/', (req, res) => {
   res.json('Hello World');
 });
 
-testConnection();
+app.use('/', categoriesRouter);
+
+// testConnection();
 // connect
 async function testConnection() {
   let conn;
