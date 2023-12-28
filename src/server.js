@@ -5,6 +5,8 @@ const cors = require('cors');
 const mysql = require('mysql2/promise');
 const { dbConfig } = require('./config');
 const categoriesRouter = require('./routes/categoriesRoutes');
+const booksRouter = require('./routes/booksRoutes');
+const testConnection = require('./routes/msqlTestRoute');
 
 const app = express();
 
@@ -21,22 +23,10 @@ app.get('/', (req, res) => {
 });
 
 app.use('/', categoriesRouter);
+app.use('/', booksRouter);
 
 // testConnection();
 // connect
-async function testConnection() {
-  let conn;
-  try {
-    conn = await mysql.createConnection(dbConfig);
-    await conn.query('SELECT * FROM posts LIMIT 1');
-    console.log('Succesfuly connected to mysql');
-  } catch (error) {
-    console.log('testConnection failed, did you start XAMPP mate???');
-    console.log(error);
-  } finally {
-    if (conn) conn.end();
-  }
-}
 
 app.listen(PORT, () => {
   console.log(`Server runing on http://localhost:${PORT}`);

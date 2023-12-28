@@ -1,4 +1,5 @@
 const express = require('express');
+const { dbQueryWithData } = require('../helper');
 
 const categoriesRouter = express.Router();
 
@@ -6,7 +7,13 @@ const categoriesRouter = express.Router();
 // GET /api/categories - grazina kategorijas su id
 categoriesRouter.get('/api/categories', async (req, res) => {
   // kreiptis i db ir grazinti categorijas (dbQueryWithData)
-  res.json('getting all cats');
+  const sql = 'SELECT * FROM categories';
+  const [rows, error] = await dbQueryWithData(sql);
+  if (error) {
+    res.status(500).json({ error: 'Internal server error' });
+    return;
+  }
+  res.json(rows);
 });
 
 // sukurti front-end papke
