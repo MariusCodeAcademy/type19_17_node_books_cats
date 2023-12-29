@@ -58,6 +58,22 @@ booksRouter.delete('/api/books/:bookId', async (req, res) => {
 });
 
 // POST - sukuria nauja knyga
+booksRouter.post('/api/books/', async (req, res) => {
+  const { title, author, year, cat_id: catId } = req.body;
+  const argArr = [title, author, year, catId];
+  const sql =
+    'INSERT INTO books (title, author, year, cat_id) VALUES (?,?,?,?)';
+
+  const [rowsObj, error] = await dbQueryWithData(sql, argArr);
+
+  if (error) {
+    console.log('error ===', error);
+    res.status(500).json({ error: 'Internal server error' });
+    return;
+  }
+  res.json(rowsObj);
+});
+
 // sukurti front-end papke
 // index.html sugeneruoti seleta su kategorijos kaip pavadinimais ir id kaip values
 

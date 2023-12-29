@@ -45,3 +45,10 @@ FROM books
 JOIN categories
 ON books.cat_id=categories.cat_id
 WHERE isDeleted=0
+
+
+-- sukurti post_comments 
+-- comm_id, content, post_id, author
+
+-- irasyti bent 3 komentarus 
+-- parasyti sql kuris atvaizduoja post title ir autoriu ir komentraro autoriu ir contenta

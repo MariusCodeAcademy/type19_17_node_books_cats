@@ -7,7 +7,8 @@ async function dbQueryWithData(sql, argArr = []) {
     // prisijungti prie DB
     conn = await mysql.createConnection(dbConfig);
     // atlikti veikma
-    const [rows] = await conn.execute(sql, argArr);
+    const [rows, fields] = await conn.execute(sql, argArr);
+    console.log('fields ===', fields);
     // grazinti duomenis
     return [rows, null];
   } catch (error) {
