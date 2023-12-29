@@ -33,3 +33,15 @@ VALUES
 ('War and Peace', 'James Band', '1965', '2');
 
 
+-- books with categories
+
+SELECT `book_id`, `title`,`author`,`year`, categories.category  
+FROM `books`
+INNER JOIN categories
+ON books.cat_id=categories.cat_id;
+
+SELECT `book_id`, `title`, `author`,`year`, categories.category, `isDeleted`
+FROM `books`
+JOIN categories
+ON books.cat_id=categories.cat_id
+WHERE isDeleted=0

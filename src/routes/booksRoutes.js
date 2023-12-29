@@ -3,7 +3,7 @@ const { dbQueryWithData } = require('../helper');
 
 const booksRouter = express.Router();
 
-// GET /api/books - grazina visas knygas
+// GET /api/books - grazina visas knygas su kategorijos pav
 booksRouter.get('/api/books', async (req, res) => {
   // kreiptis i db ir grazinti categorijas (dbQueryWithData)
   const sql = 'SELECT * FROM books WHERE isDeleted=0';
