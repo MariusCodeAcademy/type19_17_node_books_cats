@@ -71,7 +71,11 @@ booksRouter.post('/api/books/', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
     return;
   }
-  res.json(rowsObj);
+  if (rowsObj.affectedRows === 1) {
+    res.json({ msg: 'book created', bookId: rowsObj.insertId });
+    return;
+  }
+  res.status(400).json(rowsObj);
 });
 
 // sukurti front-end papke

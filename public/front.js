@@ -1,3 +1,4 @@
+/* eslint-disable strict */
 'use strict';
 console.log('front.js file was loaded');
 
@@ -26,6 +27,25 @@ function handleNewBookSubmit(event) {
     cat_id: +els.select.value,
   };
   console.log('newBookObj ===', newBookObj);
+  createNewBook(newBookObj);
+}
+
+function createNewBook(newBookData) {
+  const url = 'http://localhost:3000/api/books';
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(newBookData),
+  };
+  fetch(url, options)
+    .then((resp) => resp.json())
+    .then((data) => {
+      console.log('data ===', data);
+      // atnaujinti knygu sarasa
+    })
+    .catch((err) => console.log('err ===', err));
 }
 
 // get all categories from http://localhost:3000/api/categories
