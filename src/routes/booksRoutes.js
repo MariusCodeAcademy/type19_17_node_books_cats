@@ -6,7 +6,14 @@ const booksRouter = express.Router();
 // GET /api/books - grazina visas knygas su kategorijos pav
 booksRouter.get('/api/books', async (req, res) => {
   // kreiptis i db ir grazinti categorijas (dbQueryWithData)
-  const sql = 'SELECT * FROM books WHERE isDeleted=0';
+  // const sql = 'SELECT * FROM books WHERE isDeleted=0';
+  const sql = `
+  SELECT book_id, title, author,year, categories.category, isDeleted
+  FROM books
+  JOIN categories
+  ON books.cat_id=categories.cat_id
+  WHERE isDeleted=0
+  `;
   const [rows, error] = await dbQueryWithData(sql);
   if (error) {
     res.status(500).json({ error: 'Internal server error' });
