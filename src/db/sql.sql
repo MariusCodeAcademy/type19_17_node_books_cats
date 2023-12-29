@@ -49,6 +49,17 @@ WHERE isDeleted=0
 
 -- sukurti post_comments 
 -- comm_id, content, post_id, author
+CREATE TABLE `type19_db`.`post_comments` (
+  `comm_id` INT UNSIGNED NOT NULL AUTO_INCREMENT , 
+  `author` VARCHAR(255) NOT NULL , 
+  `content` TEXT NOT NULL , 
+  `post_id` INT UNSIGNED NOT NULL,
+  PRIMARY KEY (`comm_id`)) ENGINE = InnoDB;
 
 -- irasyti bent 3 komentarus 
 -- parasyti sql kuris atvaizduoja post title ir autoriu ir komentraro autoriu ir contenta
+SELECT posts.title, posts.author, post_comments.author AS `comment author`, 
+post_comments.content AS comment, post_comments.created_at AS `commented time`
+FROM posts
+JOIN post_comments
+ON posts.post_id=post_comments.post_id
